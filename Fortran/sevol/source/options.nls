@@ -1,0 +1,22 @@
+ &OPTIONS
+ BAROTROPIC =  F
+ FRICTION = F
+ SIMPLIFIED =        0
+ RM =         150.0E+3
+ VM =           5.0E+0
+ SRC_R =      400.0E+3
+ SRC_Z =        7.0E+3
+ SRC_SX =     100.0E+3
+ SRC_SZ =       7.0E+3
+ SRC_MAG =      0.2E-2
+ SRC_T =             0
+ M_SRC_R =      0.0E+0
+ M_SRC_Z =      0.0E+0 
+ M_SRC_SX =	0.0E+0
+ M_SRC_SZ =     0.0E+0
+ M_SRC_MAG =    0.0E-0
+ Kr =           1.0E+4
+ Src_speed =    0.0E+0
+ DT  =              60
+ MaxT =           2880
+ /

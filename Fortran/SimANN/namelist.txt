@@ -1,0 +1,9 @@
+ &INFO
+ INPUT_FILE =  'sample.txt'                    
+ OUTPUT_FILE = 'sample.out.txt'          
+ SAVE_FILE='sample.sav.txt'
+ NHIDDEN =           4
+ LEARNING_RATE =     0.5
+ TRAINING_MODE =  F
+ NEPOC = 10000
+ /
