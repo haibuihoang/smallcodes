@@ -1,0 +1,102 @@
+\documentclass[a4paper,13pt]{article} 
+\usepackage{a4,color,graphics,fancyhdr} 
+%\usepackage[dvips,colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
+
+
+\def\etal{{\it et al.} }
+\def\JAS{ {\it J. Atmos. Sci.}, }
+\def\MWR{ {\it Mon. Wea. Rev.}, }
+\def\QJRMS{ {\it Q. J. R. Meteor. Soc.}, }
+\def\hang1{\smallskip\noindent\hangindent=.35truein\hangafter=1}
+ 
+\begin{document} 
+%\twocolumn
+
+\title{The Quasi-Balanced Aximetric Evolution model}
+\author{Bui Hoang Hai}
+\date{\today}
+\maketitle 
+
+\section{Model Description}
+\label{sec:ModelDescription}
+
+\subsection{The Equations}
+\label{sec:Equations}
+
+The tendency equation for tangential wind speed in $r-z$ coordinates is:
+\begin{equation} 
+\frac{\partial v}{{\partial t}} = -u\frac{\partial v}{{\partial r}} - w\frac{\partial v}{{\partial z}}
+	                                     -\frac{uv}{{\partial r}} -fu + \dot{V} 
+\label{eq_tendency}
+\end{equation}
+
+$\dot{V}$ is the momentum source due to eddy diffusion has the form:
+
+\[{K_H}\left( {{\nabla ^2} - \frac{1}{{{r^2}}}} \right)v + \frac{{\partial \tau }}{{\partial z}}\]
+
+where $K_H$ is the horizontal eddy diffusion coeficient, $K_v$ is the vertical eddy diffusion coeficient 
+${\nabla ^2} = \frac{{{\partial ^2}}}{{\partial {r^2}}} + \frac{1}{r}\frac{\partial }{{\partial r}}$ and
+$\tau  = -{K_v}\frac{{\partial v}}{{\partial z}}$ is vertical eddy flux.
+  
+
+The Sawyer-Elliassen (SE) equation in radial-height coordinates has the form: 
+
+\[ \frac{\partial }{{\partial r}}\left[ {-g\frac{{\partial \chi }}{{\partial z}}\frac{1}{\rho r}\frac{{\partial \psi }}{{\partial
+r}} - \frac{\partial }{{\partial z}}(\chi C)\frac{1}{\rho r}\frac{{\partial \psi }}{{\partial z}}} \right] + \]
+\[ \frac{\partial }{{\partial z}}\left[ {\left( {\xi \chi (\zeta + f) + C\frac{{\partial \chi }}{{\partial r}}}
+\right)\frac{1}{\rho r}\frac{{\partial \psi }}{{\partial z}} - \frac{\partial }{{\partial z}}(\chi C)\frac{1}{\rho
+r}\frac{{\partial \psi }}{{\partial r}}} \right] = \]
+\begin{equation}
+g\frac{{\partial}}{{\partial r}}\left({\chi^2 \dot \theta}\right) + \frac{\partial }{{\partial z}}\left(C{\chi^2 \dot \theta}\right)
++ g\frac{{\partial F_\lambda}}{{\partial r}} + \frac{\partial }{{\partial z}}\left(CF_\lambda\right)
+\label{eq_se}
+\end{equation}
+
+where $\chi = 1/\theta$, $C=v^2/r+fv$, $\xi = 2v/r + f$, $\zeta = (1/r)(\partial (rv)/\partial r)$ is the vertical component of relative vorticity; $\eta=\zeta+f$ is the absolute vorticity; $\dot{\theta}=d\theta/dt$ is diabatic heating rate.
+$\psi$ is a stream function that satisfies 
+	\[u=-\frac{1}{r\rho} \frac{ \partial \psi}{ \partial z},
+	w=\frac{1}{r\rho} \frac{ \partial \psi}{ \partial r}
+\]
+
+The heating source can be defined as a function of r and z as:
+ 
+\begin{equation}
+	\dot{\theta}=M\cos{(\pi \delta_r/W)} \cos{(\pi \delta_z/H)}
+\label{eq_thetadot}
+\end{equation}
+Where $M$, $W$, $H$ is the magnitude, width and height of the source accordingly. 
+$\delta_r$, $\delta_z$ is the relative distance is the heating center. Note that in this
+formula, a potential radius $R$ is used such as:
+
+	\[1/2 fR^2 = rv + 1/2 fr^2
+\]
+
+For a prescribed tangential wind distribution $v(r,z)$ and environment field of pressure and temperature, a complete
+balanced fields of a TC can be calculated using a unapproximated method of Smith (2006). After a diabatic heating source is defined by (\ref{eq_thetadot})in potential radius coordinates and then transformed into physical coordinates, a solution for the toroidals stream function $\psi$ and hence radial and vertical wind speed can be obtained by solving the SE equation (\ref{eq_se}) using an over-successive relaxation similar to Bui \etal{}(2009) . Then, equation (\ref{eq_tendency}) can be integrated to obtain tangential wind speed in the next timestep. After each timestep, potential temperature and
+density can be {\it re-balanced} using the method of Smith (2006).
+
+\subsection{Numerical Methods}
+\label{sec:NumericalMethods}
+
+The over-successive relaxation method is the same as the one used in Bui \etal (2009).
+The diffusion terms are diffentiated as:
+	\[D_z(k) = \frac{K_z}{\Delta z^2} ( v_{k+1} +  v_{k-1} - 2v_k)
+\]
+	\[D_r(i) =  \frac{K_r}{\Delta r^2} (v_{i+1} +  v_{i-1} - 2v_i) + \frac{K_r}{2r_i\Delta r} (v_{i+1} -  v_{i-1} ) 
+\] 
+where $i$ and $k$ are the radial and vertical gridpoint number accordingly.
+
+%\newpage
+%\thispagestyle{empty}
+%\addcontentsline{toc}{chapter}{\numberline{References}{.}}
+%\vspace*{.5in}
+\begin{center}
+{\bf References}
+\end{center}
+
+
+\hang1 {H. H. Bui, R. K. Smith, M. T. Montgomery, and J. Peng, 2009: Balanced and unbalanced aspects of tropical-cyclone intensification. {\QJRMS} {\bf 135}, 1715-1731}.
+
+\hang1 {Smith RK. 2006: Accurate determination of a balanced axisymmetric vortex. {\it Tellus}, {\bf 58A}, 98-103.
+
+\end{document}

@@ -1,0 +1,3 @@
+rm test
+gfortran  module_ez_eof.f90 test_eof.f90 -llapack -o test
+#gfortran  -g -fcheck=all -Wall  module_ez_eof.f90 test_eof.f90 -llapack -o test
