@@ -97,17 +97,25 @@ end subroutine calculate_EOFs
 !X --> field to restore
 !np --> number of PCs to be process, np<=Ns
 subroutine restore_Fields(X,np)
-   integer :: np,i
+   integer, intent(in) :: np
+   integer :: i,npp
    real, dimension(e_Nt,e_Ns) :: X
    real, dimension(:,:), allocatable :: evecT
-   if (np>=e_Ns) np=e_Ns
-   allocate(evecT(np,e_Ns))
-   evecT = Transpose(e_EiVec(:,1:np))
-   X = matmul(e_PC(:,1:np),evecT)
+
+   npp=np
+   if (np .ge. e_Ns) npp=e_Ns
+
+   allocate(evecT(npp,e_Ns))
+
+   evecT = Transpose(e_EiVec(:,1:npp))
+
+   X = matmul(e_PC(:,1:npp),evecT)
    !Add the mean to restored full field
    do i=1,e_Ns
       X(:,i) = X(:,i) + e_Xmean(i)
    enddo
+   
+   deallocate(evecT)
 end subroutine restore_Fields
 
 
